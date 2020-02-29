@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MgrAngularWithDockers", "MgrAngularWithDockers\MgrAngularWithDockers.csproj", "{827812D6-FF24-4403-BE84-5FF372575C39}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "SimpleDockerTests\Tests.csproj", "{ED0FDA02-9D06-484F-B80E-42292A446BAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MicroServices", "MicroServices", "{E687D9B2-1A60-480F-9B0B-0783AD399C4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{72E9C913-9A0F-4FE4-9F9A-2738EB6644BB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRunnerMicroService", "DockerContainerService\TestRunnerMicroService.csproj", "{E720901D-DA20-470A-A7C6-6409589D353C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigurationCreatorMicroService", "ContainerCreatorMicroService\ConfigurationCreatorMicroService.csproj", "{17A35489-9205-4765-B5EB-128979C6C6FF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{827812D6-FF24-4403-BE84-5FF372575C39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827812D6-FF24-4403-BE84-5FF372575C39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{827812D6-FF24-4403-BE84-5FF372575C39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{827812D6-FF24-4403-BE84-5FF372575C39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED0FDA02-9D06-484F-B80E-42292A446BAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED0FDA02-9D06-484F-B80E-42292A446BAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED0FDA02-9D06-484F-B80E-42292A446BAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED0FDA02-9D06-484F-B80E-42292A446BAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E720901D-DA20-470A-A7C6-6409589D353C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E720901D-DA20-470A-A7C6-6409589D353C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E720901D-DA20-470A-A7C6-6409589D353C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E720901D-DA20-470A-A7C6-6409589D353C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17A35489-9205-4765-B5EB-128979C6C6FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17A35489-9205-4765-B5EB-128979C6C6FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17A35489-9205-4765-B5EB-128979C6C6FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17A35489-9205-4765-B5EB-128979C6C6FF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ED0FDA02-9D06-484F-B80E-42292A446BAA} = {72E9C913-9A0F-4FE4-9F9A-2738EB6644BB}
+		{E720901D-DA20-470A-A7C6-6409589D353C} = {E687D9B2-1A60-480F-9B0B-0783AD399C4A}
+		{17A35489-9205-4765-B5EB-128979C6C6FF} = {E687D9B2-1A60-480F-9B0B-0783AD399C4A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16EF299F-6961-4523-A427-4FC33B775732}
+	EndGlobalSection
+EndGlobal
