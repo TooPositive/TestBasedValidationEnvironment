@@ -7,12 +7,9 @@ namespace Tests.Interfaces
 {
     public interface ITest
     {
-        string Name { get; set; }
+        int Id { get; set; }
+        string TestNamespace { get; set; }
         TimeSpan Duration { get; set; }
         int Iterations { get; set; }
-        TestResult TestResult { get; set; }
-        Func<Task> TestFlow { get; set; }
-        Task RunTest();
-        Task OnTestEnd();
     }
 }

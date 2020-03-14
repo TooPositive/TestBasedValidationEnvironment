@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InstanceMicroService.Statics
+namespace InstanceMicroService.Instances
 {
-    public static class Enums
+    public interface IVboxInstance : IInstance
     {
-        public enum EnviromentType { Docker, VirtualBox };
+        
     }
 }

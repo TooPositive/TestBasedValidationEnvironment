@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ContainerCreatorMicroService": {
+    "InstanceMicroService": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "weatherforecast",

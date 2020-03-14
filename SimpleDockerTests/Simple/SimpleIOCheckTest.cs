@@ -13,17 +13,18 @@ namespace Tests.Simple
     {
         private static Func<TestResult> FuncTestResultCheck { get; set; }
         private string[] files;
-        public SimpleIOCheckTest() : base("SimpleIOCheck", TimeSpan.FromMinutes(5), 1)
+        public SimpleIOCheckTest() : base("SimpleIOCheck", TimeSpan.FromMinutes(5), 2)
         {
             base.TestFlow = Flow;
         }
 
-        public async Task Flow()
+        public void Flow()
+
         {
             var directoryToCheck = Directory.GetCurrentDirectory();
             files = Directory.GetFiles(directoryToCheck);
             Console.WriteLine($"Files from directory ({directoryToCheck}");
-            await Task.Delay(3000);
+            Thread.Sleep(3000);
             Console.WriteLine(files);
             if (files.Length <= 0)
                 throw new Exception("Didn't find any files");

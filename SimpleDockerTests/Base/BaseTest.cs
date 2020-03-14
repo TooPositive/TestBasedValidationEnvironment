@@ -12,25 +12,26 @@ namespace Tests.Base
 {
     public abstract class BaseTest : ITest
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string TestNamespace { get; set; }
         public TimeSpan Duration { get; set; }
         public int Iterations { get; set; }
         public TestResult TestResult { get; set; }
-        public Func<Task> TestFlow { get; set; }
+        public Action TestFlow { get; set; }
 
-        protected BaseTest(string name, TimeSpan duration, int iterations)
+        protected BaseTest(string testNamespace, TimeSpan duration, int iterations)
         {
-            Name = name;
+            TestNamespace = testNamespace;
             Duration = duration;
             Iterations = iterations;
         }
 
-        public async Task RunTest()
+        public void RunTest()
         {
             try
             {
                 for (int i = 0; i < Iterations; i++)
-                    await TestFlow.Invoke();
+                    TestFlow.Invoke();
 
                 TestResult = TestResult.Passed;
             }
@@ -39,13 +40,13 @@ namespace Tests.Base
                 Console.WriteLine($"Test failed. {e.Message}");
                 TestResult = TestResult.Failed;
             }
-            await OnTestEnd();
+            OnTestEnd();
         }
 
-        public async Task OnTestEnd()
+        public void OnTestEnd()
         {
             Console.WriteLine("Sending result to api.");
-            await ApiConnector.CallServiceAsync<HttpResponse>(Statics.TestMicroserviceUrl, this, HttpMethods.Post);
+            ApiConnector.CallServiceAsync<HttpResponse>(Statics.TestMicroserviceUrl, this, HttpMethods.Post);
         }
     }
 }
