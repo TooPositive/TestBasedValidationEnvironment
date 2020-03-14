@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 using MgrAngularWithDockers.Controllers;
-using MgrAngularWithDockers.Contracts;
+using MgrAngularWithDockers.Interfaces;
 using System.Linq;
+using Castle.Core.Logging;
+using Microsoft.Extensions.Logging;
+using MgrAngularWithDockers.Core.Services.Interfaces;
 
 namespace IntegrationTests.Api
 {
@@ -14,13 +17,15 @@ namespace IntegrationTests.Api
     public class TestResultTest
     {
         private TestResultController _testResultController;
-        private Mock<ITestResultRepository> _mockRepo;
+        private Mock<ITestResultService> _mockRepo;
+        private Mock<ILogger<TestResultController>> _logger;
 
         [SetUp]
         public void SetUp()
         {
-            _mockRepo = new Mock<ITestResultRepository>();
-            _testResultController = new TestResultController(_mockRepo.Object);
+            _mockRepo = new Mock<ITestResultService>();
+            _logger = new Mock<ILogger<TestResultController>>();
+            _testResultController = new TestResultController(_logger.Object, _mockRepo.Object);
         }
 
         [Test]

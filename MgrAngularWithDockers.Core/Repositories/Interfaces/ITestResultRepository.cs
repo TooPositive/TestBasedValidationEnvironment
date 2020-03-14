@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MgrAngularWithDockers.Contracts
+namespace MgrAngularWithDockers.Interfaces
 {
     public interface ITestResultRepository
     {

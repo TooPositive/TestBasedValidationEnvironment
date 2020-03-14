@@ -7,6 +7,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using System;
+using MgrAngularWithDockers.Interfaces;
+using MgrAngularWithDockers.Core.Repositories;
 
 namespace MgrAngularWithDockers
 {
@@ -26,6 +28,7 @@ namespace MgrAngularWithDockers
             // In production, the Angular files will be served from this directory
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("DefaultConnection"));
+            AddRepositoryInterfaceTransactions(services);
 
             services.AddSpaStaticFiles(configuration =>
             {
@@ -73,6 +76,12 @@ namespace MgrAngularWithDockers
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        private void AddRepositoryInterfaceTransactions(IServiceCollection services)
+        {
+            services.AddTransient<ITestRepository, TestRepository>();
+            services.AddTransient<ITestResultRepository, TestResultRepository>();;
         }
 
     }

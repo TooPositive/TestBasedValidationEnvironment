@@ -14,7 +14,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
@@ -30,11 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MgrAngularWithDockers.Core\MgrAngularWithDockers.Core.csproj" />
     <ProjectReference Include="..\SimpleDockerTests\Tests.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

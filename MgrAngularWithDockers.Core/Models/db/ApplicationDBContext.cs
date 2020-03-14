@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MgrAngularWithDockers.Core.Models.db.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MgrAngularWithDockers.Models.db
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext, IDbContext
     {
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
@@ -23,7 +24,7 @@ namespace MgrAngularWithDockers.Models.db
                  .Build();
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         }
-
+        
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestResult> TestResults { get; set; }
 
