@@ -1,26 +1,17 @@
-﻿using MgrAngularWithDockers.Interfaces;
+﻿using MgrAngularWithDockers.Core.Generics;
+using MgrAngularWithDockers.Interfaces;
 using MgrAngularWithDockers.Models;
+using MgrAngularWithDockers.Models.db;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MgrAngularWithDockers.Core.Repositories
 {
-    public class TestResultRepository : ITestResultRepository
+    public class TestResultRepository : Repository<TestResult>
     {
-        public IEnumerable<TestResult> Create(TestResult testResult)
+        public TestResultRepository(ApplicationDbContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TestResult> Get()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TestResult> Get(Guid id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

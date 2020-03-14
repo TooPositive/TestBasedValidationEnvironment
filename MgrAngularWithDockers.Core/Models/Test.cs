@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MgrAngularWithDockers.Core.Generics;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,10 +10,10 @@ using Tests.Interfaces;
 
 namespace MgrAngularWithDockers.Models
 {
-    public class Test : ITest
+    public class Test : ITest, IEntity
     {
         [Key]
-        public Guid Guid { get; set; }
+        public Guid Id { get; set; }
         public string TestNamespace { get; set; }
         public TimeSpan Duration { get; set; }
         public int Iterations { get; set; }

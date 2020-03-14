@@ -12,7 +12,7 @@ namespace Tests.Base
 {
     public abstract class BaseTest : ITest
     {
-        public Guid Guid { get; set; }
+        public Guid Id { get; set; }
         public string TestNamespace { get; set; }
         public TimeSpan Duration { get; set; }
         public int Iterations { get; set; }

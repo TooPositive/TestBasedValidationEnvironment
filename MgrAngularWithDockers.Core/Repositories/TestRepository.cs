@@ -1,4 +1,5 @@
-﻿using MgrAngularWithDockers.Interfaces;
+﻿using MgrAngularWithDockers.Core.Generics;
+using MgrAngularWithDockers.Interfaces;
 using MgrAngularWithDockers.Models;
 using MgrAngularWithDockers.Models.db;
 using System;
@@ -9,29 +10,10 @@ using System.Threading.Tasks;
 
 namespace MgrAngularWithDockers.Core.Repositories
 {
-    public class TestRepository : ITestRepository
+    public class TestRepository : Repository<Test>
     {
-        private readonly ApplicationDbContext _applicationDbContext;
-        //public TestRepository(ApplicationDbContext applicationDbContext)
-        //{
-        //    _applicationDbContext = applicationDbContext;
-        //}
-
-        public IEnumerable<Test> Create(Test test)
+        public TestRepository(ApplicationDbContext context) : base(context)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<TestResult> Get() => _applicationDbContext.TestResults.ToList();
-
-        public IEnumerable<Test> Get(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Test> ITestRepository.Get()
-        {
-            throw new NotImplementedException();
         }
     }
 }

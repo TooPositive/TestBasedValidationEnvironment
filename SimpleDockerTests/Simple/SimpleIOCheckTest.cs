@@ -16,7 +16,7 @@ namespace Tests.Simple
         public SimpleIOCheckTest() : base("SimpleIOCheck", TimeSpan.FromMinutes(5), 2)
         {
             base.TestFlow = Flow;
-            Guid = new Guid("6C8588B1-10EE-40D6-9B94-063451097327");
+            Id = new Guid("6C8588B1-10EE-40D6-9B94-063451097327");
         }
 
         public void Flow()

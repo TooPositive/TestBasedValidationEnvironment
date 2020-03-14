@@ -12,7 +12,7 @@ namespace InstanceMicroService.Instances
     public class DockerInstance : IDockerInstance
     {
         public string Name { get; set; }
-        public Guid Guid { get; set; }
+        public Guid Id { get; set; }
 
         public Task Destroy()
         {

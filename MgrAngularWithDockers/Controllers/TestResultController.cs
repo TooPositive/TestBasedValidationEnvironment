@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MgrAngularWithDockers.Core.Services.Interfaces;
+using MgrAngularWithDockers.Core.Models.Interfaces;
 
 namespace MgrAngularWithDockers.Controllers
 {
@@ -21,9 +22,9 @@ namespace MgrAngularWithDockers.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<TestResult> Get()
+        public IEnumerable<ITestResult> Filter()
         {
-            return testResultService.Get();
+            return testResultService.Filter();
         }
     }
 }

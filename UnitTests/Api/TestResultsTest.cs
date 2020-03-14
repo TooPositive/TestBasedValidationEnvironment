@@ -31,9 +31,9 @@ namespace IntegrationTests.Api
         [Test]
         public void GetAllTestResults()
         {
-            _mockRepo.Setup(repo => repo.Get()).Returns(new List<TestResult>() { new TestResult(), new TestResult() });
+            _mockRepo.Setup(repo => repo.Filter()).Returns(new List<TestResult>() { new TestResult(), new TestResult() });
 
-            var result = _testResultController.Get();
+            var result = _testResultController.Filter();
             Assert.IsTrue(result is IEnumerable<TestResult>);
             Assert.AreEqual(2, result.Count());
         }

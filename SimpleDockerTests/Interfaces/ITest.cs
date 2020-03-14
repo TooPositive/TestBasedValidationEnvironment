@@ -7,7 +7,7 @@ namespace Tests.Interfaces
 {
     public interface ITest
     {
-        Guid Guid { get; set; }
+        Guid Id { get; set; }
         string TestNamespace { get; set; }
         TimeSpan Duration { get; set; }
         int Iterations { get; set; }
