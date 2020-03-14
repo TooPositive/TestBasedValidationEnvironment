@@ -12,11 +12,11 @@ namespace Tests.Base
 {
     public abstract class BaseTest : ITest
     {
-        public int Id { get; set; }
+        public Guid Guid { get; set; }
         public string TestNamespace { get; set; }
         public TimeSpan Duration { get; set; }
         public int Iterations { get; set; }
-        public TestResult TestResult { get; set; }
+        public Results Results { get; set; }
         public Action TestFlow { get; set; }
 
         protected BaseTest(string testNamespace, TimeSpan duration, int iterations)
@@ -33,12 +33,12 @@ namespace Tests.Base
                 for (int i = 0; i < Iterations; i++)
                     TestFlow.Invoke();
 
-                TestResult = TestResult.Passed;
+                Results = Results.Passed;
             }
             catch (Exception e)
             {
                 Console.WriteLine($"Test failed. {e.Message}");
-                TestResult = TestResult.Failed;
+                Results = Results.Failed;
             }
             OnTestEnd();
         }

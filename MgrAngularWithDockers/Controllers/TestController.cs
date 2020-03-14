@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MgrAngularWithDockers.Contracts;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,18 @@ namespace MgrAngularWithDockers.Controllers
     public class TestController : ControllerBase
     {
         private readonly ILogger<TestController> _logger;
+        private readonly ITestRepository _testRepository;
         public TestController(ILogger<TestController> logger)
         {
-            _logger = logger;
+            this._logger = logger;
         }
+
+        public TestController(ITestRepository testRepository)
+        {
+            this._testRepository = testRepository;
+        }
+
+        //[HttpPost]
 
         //[HttpGet]
         //public IEnumerable<WeatherForecast> Get()

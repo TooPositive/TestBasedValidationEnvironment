@@ -6,19 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using Tests.Base;
 using Tests.Interfaces;
-using static Tests.Base.Enums;
 
 namespace MgrAngularWithDockers.Models
 {
     public class Test : ITest
     {
         [Key]
-        public int Id { get; set; }
-        [Required]
+        public Guid Guid { get; set; }
         public string TestNamespace { get; set; }
-        [Required]
         public TimeSpan Duration { get; set; }
-        [Required]
         public int Iterations { get; set; }
+
+        public virtual TestResult TestResult { get; set; }
     }
 }

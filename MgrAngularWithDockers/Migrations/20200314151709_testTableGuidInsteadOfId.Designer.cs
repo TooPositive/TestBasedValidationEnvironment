@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MgrAngularWithDockers.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200312193317_InitialDatabaseCreation")]
-    partial class InitialDatabaseCreation
+    [Migration("20200314151709_testTableGuidInsteadOfId")]
+    partial class testTableGuidInsteadOfId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,9 @@ namespace MgrAngularWithDockers.Migrations
 
             modelBuilder.Entity("MgrAngularWithDockers.Models.Test", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Guid")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("time");
@@ -35,10 +34,9 @@ namespace MgrAngularWithDockers.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("TestNamespace")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("Guid");
 
                     b.ToTable("Tests");
                 });

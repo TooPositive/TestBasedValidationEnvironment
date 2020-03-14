@@ -11,11 +11,12 @@ namespace Tests.Simple
 {
     public class SimpleIOCheckTest : BaseTest
     {
-        private static Func<TestResult> FuncTestResultCheck { get; set; }
+        private static Func<Results> FuncTestResultCheck { get; set; }
         private string[] files;
         public SimpleIOCheckTest() : base("SimpleIOCheck", TimeSpan.FromMinutes(5), 2)
         {
             base.TestFlow = Flow;
+            Guid = new Guid("6C8588B1-10EE-40D6-9B94-063451097327");
         }
 
         public void Flow()

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MgrAngularWithDockers.Migrations
 {
-    public partial class InitialDatabaseCreation : Migration
+    public partial class initVersion5 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace MgrAngularWithDockers.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TestNamespace = table.Column<string>(nullable: false),
+                    TestNamespace = table.Column<string>(nullable: true),
                     Duration = table.Column<TimeSpan>(nullable: false),
                     Iterations = table.Column<int>(nullable: false)
                 },

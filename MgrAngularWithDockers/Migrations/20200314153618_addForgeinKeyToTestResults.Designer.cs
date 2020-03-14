@@ -4,14 +4,16 @@ using MgrAngularWithDockers.Models.db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace MgrAngularWithDockers.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200314153618_addForgeinKeyToTestResults")]
+    partial class addForgeinKeyToTestResults
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,13 +47,15 @@ namespace MgrAngularWithDockers.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Result")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("ResultGuid")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("TestGuid")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Guid");
+
+                    b.HasIndex("ResultGuid");
 
                     b.HasIndex("TestGuid")
                         .IsUnique();
@@ -61,6 +65,10 @@ namespace MgrAngularWithDockers.Migrations
 
             modelBuilder.Entity("MgrAngularWithDockers.Models.TestResult", b =>
                 {
+                    b.HasOne("MgrAngularWithDockers.Models.TestResult", "Result")
+                        .WithMany()
+                        .HasForeignKey("ResultGuid");
+
                     b.HasOne("MgrAngularWithDockers.Models.Test", "Test")
                         .WithOne("TestResult")
                         .HasForeignKey("MgrAngularWithDockers.Models.TestResult", "TestGuid")

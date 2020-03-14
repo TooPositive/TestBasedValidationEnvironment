@@ -8,7 +8,6 @@ namespace Tests.Base
 {
     public static class Enums
     {
-        public enum TestResult { Passed, Failed };
-        public enum TestNames { SimpleIOCheck };
+        public enum Results { Passed, Failed };
     }
 }
