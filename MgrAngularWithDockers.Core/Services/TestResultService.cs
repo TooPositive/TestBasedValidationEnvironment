@@ -12,40 +12,8 @@ using System.Threading.Tasks;
 
 namespace MgrAngularWithDockers.Core.Services
 {
-    public class TestResultService : TestResultRepository, ITestResultService
+    public class TestResultService : ITestResultService
     {
-        public TestResultService(ApplicationDbContext context) : base(context)
-        {
-        }
 
-        public void Create(ITestResult entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(ITestResult entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Edit(ITestResult entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<ITestResult> Filter(Expression<Func<ITestResult, bool>> predicate)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<ITestResult> IRepository<ITestResult>.Filter()
-        {
-            throw new NotImplementedException();
-        }
-
-        ITestResult IRepository<ITestResult>.GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

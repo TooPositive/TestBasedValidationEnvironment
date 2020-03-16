@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MgrAngularWithDockers.Core.Services.Interfaces
 {
-    public interface ITestResultService : IRepository<ITestResult>
+    public interface ITestResultService
     {
         
     }

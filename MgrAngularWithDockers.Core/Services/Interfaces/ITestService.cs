@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MgrAngularWithDockers.Core.Services.Interfaces
 {
-    public interface ITestService : ITestRepository
+    public interface ITestService
     {
     }
 }

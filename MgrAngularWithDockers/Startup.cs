@@ -49,7 +49,6 @@ namespace MgrAngularWithDockers
                 app.UseExceptionHandler("/Error");
             }
 
-
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
