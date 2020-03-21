@@ -6,12 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using System;
-using MgrAngularWithDockers.Interfaces;
-using MgrAngularWithDockers.Core.Repositories;
 using MgrAngularWithDockers.Core.Generics;
 using AutoMapper;
 using MgrAngularWithDockers.Core.Extensions;
+using Microsoft.AspNet.OData.Extensions;
 
 namespace MgrAngularWithDockers
 {
@@ -27,7 +25,6 @@ namespace MgrAngularWithDockers
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
 
             AutoMapperConfiguration(services);
@@ -36,11 +33,13 @@ namespace MgrAngularWithDockers
             options.UseSqlServer("DefaultConnection")
             .UseLazyLoadingProxies());
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddControllers().AddNewtonsoftJson();
+            services.AddOData();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,13 +60,14 @@ namespace MgrAngularWithDockers
                 app.UseSpaStaticFiles();
             }
 
+            //app.UseHttpsRedirection();
             app.UseRouting();
-
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
+                endpoints.EnableDependencyInjection();
+                endpoints.Select().Filter().OrderBy().Count().MaxTop(10);
             });
 
             app.UseSpa(spa =>
@@ -82,6 +82,8 @@ namespace MgrAngularWithDockers
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            
         }
 
 

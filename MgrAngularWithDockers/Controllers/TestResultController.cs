@@ -13,6 +13,7 @@ using MgrAngularWithDockers.Core.Services;
 using MgrAngularWithDockers.Core.Dtos;
 using Microsoft.AspNetCore.Http;
 using AutoMapper;
+using Microsoft.AspNet.OData;
 
 namespace MgrAngularWithDockers.Controllers
 {
@@ -44,6 +45,7 @@ namespace MgrAngularWithDockers.Controllers
         }
 
         [HttpGet]
+        [EnableQuery]
         [Route("[action]")]
         public IEnumerable<TestResultDto> Filter()
         {
@@ -52,3 +54,4 @@ namespace MgrAngularWithDockers.Controllers
         }
     }
 }
+

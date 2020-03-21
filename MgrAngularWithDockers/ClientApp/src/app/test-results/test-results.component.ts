@@ -9,7 +9,8 @@ import { TestResultDto } from '../dtos/TestResultDto';
 })
 export class TestResultComponent {
     
-  public testResults: TestResultDto[];  
+  public historyTestResults: TestResultDto[];  
+  public inprogressTestResults: TestResultDto[];  
   public historyHeaders: string[] = ["TestName", "Execution Time", "Duration", "Result"];
   public inprogressHeaders: string[] = ["TestName", "Progress"];
 
@@ -22,13 +23,13 @@ export class TestResultComponent {
 
   private getHistoryTestResults(http: HttpClient, baseUrl: string) {
         http.get<TestResultDto[]>(baseUrl + 'api/TestResult/Filter').subscribe(result => {
-            this.testResults = result;
+          this.historyTestResults = result;
         }, error => console.error(error));
   }
 
   private getInprogressTestResults(http: HttpClient, baseUrl: string) {
-    http.get<TestResultDto[]>(baseUrl + 'api/TestResult/Filter').subscribe(result => {
-      this.testResults = result;
+    http.get<TestResultDto[]>(baseUrl + `api/TestResult/Filter/?$filter=Result eq 'InProgress'`).subscribe(result => {
+      this.inprogressTestResults = result;
     }, error => console.error(error));
   }
 }

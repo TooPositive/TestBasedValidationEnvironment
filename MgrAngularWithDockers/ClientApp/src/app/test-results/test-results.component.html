@@ -12,7 +12,7 @@
       </tr>
     </tfoot>
     <tbody>
-      <tr *ngFor="let testResult of testResults">
+      <tr *ngFor="let testResult of historyTestResults">
         <td>
           {{testResult.testName}}
         </td>
@@ -43,18 +43,12 @@
       </tr>
     </tfoot>
     <tbody>
-      <tr *ngFor="let testResult of testResults">
+      <tr *ngFor="let testResult of inprogressTestResults">
         <td>
           {{testResult.testName}}
         </td>
         <td>
-          {{testResult.executionTime | date: 'dd/MM/yyyy h:mm:ss'}}
-        </td>
-        <td>
           {{testResult.testDuration.minutes}} : {{testResult.testDuration.seconds}}
-        </td>
-        <td>
-          {{testResult.result}}
         </td>
       </tr>
     </tbody>
