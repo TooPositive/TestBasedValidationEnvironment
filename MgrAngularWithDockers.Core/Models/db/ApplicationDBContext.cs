@@ -25,6 +25,13 @@ namespace MgrAngularWithDockers.Models.db
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         }
         
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<TestResult>()
+        //        .Property(x=> x.Id).IsRequired()
+        //        .Property(x=> x.).IsRequired()
+        //}
+
         public DbSet<Test> Tests { get; set; }
         public DbSet<TestResult> TestResults { get; set; }
 

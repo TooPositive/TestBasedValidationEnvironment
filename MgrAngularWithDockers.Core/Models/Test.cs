@@ -18,6 +18,6 @@ namespace MgrAngularWithDockers.Models
         public TimeSpan Duration { get; set; }
         public int Iterations { get; set; }
 
-        public virtual TestResult TestResult { get; set; }
+        public virtual ICollection<TestResult> TestResults { get; set; }
     }
 }

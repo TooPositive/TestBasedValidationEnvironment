@@ -7,18 +7,20 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./test-results.scss']
 })
 export class TestResultComponent {
-  public forecasts: TestResult[];
+  public testResults: TestResult[];
+  public historyHeaders: string[] = ["GUID", "TestName", "Time", "Result"];
+  public something: string = "hello";
+
 
   constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    http.get<TestResult[]>(baseUrl + 'TestResult').subscribe(result => {
-      this.forecasts = result;
+    console.log(baseUrl + 'api/TestResult/Filter');
+    http.get<TestResult[]>(baseUrl + 'api/TestResult/Filter').subscribe(result => {
+      this.testResults = result;
+      console.log(this.testResults);
     }, error => console.error(error));
   }
+
+
 }
 
-interface TestResult {
-  guid: string;
-  resultId: number;
-  testGuid: string;
-}
 

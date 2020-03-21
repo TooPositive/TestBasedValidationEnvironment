@@ -10,6 +10,8 @@ using System;
 using MgrAngularWithDockers.Interfaces;
 using MgrAngularWithDockers.Core.Repositories;
 using MgrAngularWithDockers.Core.Generics;
+using AutoMapper;
+using MgrAngularWithDockers.Core.Extensions;
 
 namespace MgrAngularWithDockers
 {
@@ -28,7 +30,11 @@ namespace MgrAngularWithDockers
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("DefaultConnection"));
+            AutoMapperConfiguration(services);
+
+            services.AddDbContext<ApplicationDbContext>(options => 
+            options.UseSqlServer("DefaultConnection")
+            .UseLazyLoadingProxies());
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
             services.AddSpaStaticFiles(configuration =>
@@ -76,6 +82,18 @@ namespace MgrAngularWithDockers
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+
+        private void AutoMapperConfiguration(IServiceCollection services)
+        {
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
     }
 }

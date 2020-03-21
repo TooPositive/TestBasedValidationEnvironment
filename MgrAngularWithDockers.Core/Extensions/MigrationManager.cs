@@ -20,6 +20,7 @@ namespace MgrAngularWithDockers.Extensions
                 {
                     try
                     {
+                        appContext.Database.EnsureCreated();
                         appContext.Database.Migrate();
                     }
                     catch (Exception ex)

@@ -1,4 +1,6 @@
-﻿using MgrAngularWithDockers.Interfaces;
+﻿using MgrAngularWithDockers.Core.Generics;
+using MgrAngularWithDockers.Interfaces;
+using MgrAngularWithDockers.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -6,39 +8,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tests.Interfaces;
 
 namespace MgrAngularWithDockers.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class TestController : ControllerBase
     {
         private readonly ILogger<TestController> _logger;
-        private readonly ITestRepository _testRepository;
-        public TestController(ILogger<TestController> logger)
+        private readonly IRepository<Test> testRepository;
+        public TestController(ILogger<TestController> logger, IRepository<Test> testRepo)
         {
             this._logger = logger;
+            this.testRepository = testRepo;
         }
 
-        public TestController(ITestRepository testRepository)
+        [HttpGet]
+        [Route("[action]")]
+        public IEnumerable<ITest> Filter()
         {
-            this._testRepository = testRepository;
+            var xx = testRepository.Filter().ToList();
+            return xx;
         }
-
-        //[HttpPost]
-
-        //[HttpGet]
-        //public IEnumerable<WeatherForecast> Get()
-        //{
-        //    var rng = new Random();
-        //    return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-        //    {
-        //        Date = DateTime.Now.AddDays(index),
-        //        TemperatureC = rng.Next(-20, 55),
-        //        Summary = Summaries[rng.Next(Summaries.Length)]
-        //    })
-        //    .ToArray();
-        //}
 
     }
 }

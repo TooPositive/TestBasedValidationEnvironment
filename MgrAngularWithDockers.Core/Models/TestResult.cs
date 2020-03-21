@@ -16,8 +16,11 @@ namespace MgrAngularWithDockers.Models
         [Key]
         public Guid Id { get; set; }
         public Results Result { get; set; }
+        public DateTime ExecutionTime { get; set; }
+        public TimeSpan TestDuration { get; set; }
+
         [ForeignKey("Test")]
-        public Guid TestGuid { get; set; }
+        public Guid TestId { get; set; }
         public virtual Test Test { get; set; }
     }
 }

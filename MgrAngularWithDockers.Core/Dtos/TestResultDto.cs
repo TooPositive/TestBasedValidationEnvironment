@@ -11,6 +11,9 @@ namespace MgrAngularWithDockers.Core.Dtos
     {
         public Guid Id { get; set; }
         public Results Result { get; set; }
-        public Guid TestGuid { get; set; }
+        public Guid TestId { get; set; }
+        public string TestName { get; set; }
+        public DateTime ExecutionTime { get; set; }
+        public TimeSpan TestDuration { get; set; }
     }
 }
