@@ -7,7 +7,8 @@ using InstanceMicroService.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Tests.Interfaces;
+using Tests.Core.Interfaces;
+using Tests.Core.Simple;
 
 namespace InstanceMicroService.Controllers
 {
@@ -24,8 +25,10 @@ namespace InstanceMicroService.Controllers
 
         // GET: api/InstanceCreatorController/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public async Task<string> Get(int id)
         {
+            var xx = new DockerInstance();
+            await xx.StartTest(new SimpleIOCheckTest());
             return "value";
         }
 

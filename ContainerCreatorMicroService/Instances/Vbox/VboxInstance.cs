@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Tests.Interfaces;
+using Tests.Core.Interfaces;
 
 namespace InstanceMicroService.Instances
 {

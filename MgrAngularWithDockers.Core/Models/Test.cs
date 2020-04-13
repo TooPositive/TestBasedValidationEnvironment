@@ -5,8 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tests.Base;
-using Tests.Interfaces;
+using Tests.Core.Base;
+using Tests.Core.Interfaces;
 
 namespace MgrAngularWithDockers.Models
 {

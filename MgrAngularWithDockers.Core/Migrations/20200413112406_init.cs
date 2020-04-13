@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MgrAngularWithDockers.Core.Migrations
 {
-    public partial class init_first : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,6 +27,8 @@ namespace MgrAngularWithDockers.Core.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Result = table.Column<int>(nullable: false),
+                    ExecutionTime = table.Column<DateTime>(nullable: false),
+                    TestDuration = table.Column<TimeSpan>(nullable: false),
                     TestId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>

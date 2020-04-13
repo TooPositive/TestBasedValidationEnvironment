@@ -1,14 +1,14 @@
-﻿using Tests.Interfaces;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using static Tests.Base.Enums;
+using Tests.Core.Interfaces;
+using static Tests.Core.Base.Enums;
 
-namespace Tests.Base
+namespace Tests.Core.Base
 {
     public abstract class BaseTest : ITest
     {

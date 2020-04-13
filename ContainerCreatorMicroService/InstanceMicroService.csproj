@@ -7,18 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Docker.DotNet" Version="3.125.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <None Remove="Dockerfile" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Docker\" />
+    <PackageReference Include="Docker.DotNet" Version="3.125.2" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.9.10" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="SharpZipLib" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Services\Vbox\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SimpleDockerTests\Tests.csproj" />
+    <ProjectReference Include="..\Tests.Core\Tests.Core.csproj" />
   </ItemGroup>
 
 

@@ -6,9 +6,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Tests.Interfaces;
+using Tests.Core.Interfaces;
 
 namespace MgrAngularWithDockers.Controllers
 {
@@ -31,6 +32,7 @@ namespace MgrAngularWithDockers.Controllers
             var xx = testRepository.Filter().ToList();
             return xx;
         }
+
 
     }
 }

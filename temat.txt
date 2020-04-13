@@ -1,0 +1,1 @@
+Przegląd technologii mikroserwisów oraz implementacja przy użyciu kontenerów. Badanie wydajności rozwiązań.

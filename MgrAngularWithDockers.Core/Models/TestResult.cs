@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using static Tests.Base.Enums;
+using static Tests.Core.Base.Enums;
 
 namespace MgrAngularWithDockers.Models
 {

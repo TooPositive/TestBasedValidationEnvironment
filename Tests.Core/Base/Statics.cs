@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tests.Base
+namespace Tests.Core.Base
 {
     public static class Statics
     {

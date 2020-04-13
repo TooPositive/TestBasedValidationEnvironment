@@ -1,9 +1,7 @@
-﻿using Tests.Base;
-using System;
+﻿using System;
 using System.Threading.Tasks;
-using static Tests.Base.Enums;
 
-namespace Tests.Interfaces
+namespace Tests.Core.Interfaces
 {
     public interface ITest
     {

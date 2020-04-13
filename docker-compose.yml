@@ -1,0 +1,53 @@
+version: "3.5"
+
+networks:
+  localdev:
+    name: localdev
+
+services: 
+ db-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    container_name: db-server
+    environment: 
+      ACCEPT_EULA: Y
+      SA_PASSWORD: Mgr5432!
+      MSSQL_DB: MgrAngularWithDockers
+      MSSQL_TCP_PORT: 1433
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+    networks:
+      - localdev
+
+ webangular:
+    build: 
+      context: .
+      dockerfile: MgrAngularWithDockers/ClientApp/Dockerfile
+    ports:
+      - "4200:4200" 
+      - "49153:49153"
+    volumes:
+      - ./MgrAngularWithDockers/ClientApp:/app
+    networks:
+      - localdev   
+
+ webapi:
+    build: 
+     context: .
+     dockerfile: Dockerfile
+     args:
+      - skip_client_build=true
+    restart: always
+    ports: 
+      - "7000:80"
+    depends_on: 
+      - db-server
+      - webangular
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - Database=MgrAngularWithDockers
+      - DBUser=sa
+      - DBPort=1433
+      - InDocker=true
+    networks:
+      - localdev

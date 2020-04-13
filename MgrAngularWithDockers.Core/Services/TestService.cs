@@ -1,11 +1,5 @@
-﻿using MgrAngularWithDockers.Core.Services.Interfaces;
-using MgrAngularWithDockers.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MgrAngularWithDockers.Models.db;
+﻿using MgrAngularWithDockers.Core.Repositories;
+using MgrAngularWithDockers.Core.Models.db;
 
 namespace MgrAngularWithDockers.Core.Services
 {

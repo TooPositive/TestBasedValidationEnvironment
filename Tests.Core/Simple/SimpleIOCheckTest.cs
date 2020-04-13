@@ -1,13 +1,13 @@
-﻿using Tests.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using static Tests.Base.Enums;
 using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using Tests.Core.Base;
+using static Tests.Core.Base.Enums;
 
-namespace Tests.Simple
+namespace Tests.Core.Simple
 {
     public class SimpleIOCheckTest : BaseTest
     {

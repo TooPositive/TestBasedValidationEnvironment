@@ -22,7 +22,8 @@ export class TestResultComponent {
 
 
   private getHistoryTestResults(http: HttpClient, baseUrl: string) {
-        http.get<TestResultDto[]>(baseUrl + 'api/TestResult/Filter').subscribe(result => {
+    console.log(`trying connect to: ${baseUrl + `api/TestResult/Filter/?$filter=Result ne 'InProgress'`}`);
+        http.get<TestResultDto[]>(baseUrl + `api/TestResult/Filter/?$filter=Result ne 'InProgress'`).subscribe(result => {
           this.historyTestResults = result;
         }, error => console.error(error));
   }

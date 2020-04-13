@@ -1,7 +1,5 @@
-using MgrAngularWithDockers.Models.db;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -10,6 +8,8 @@ using MgrAngularWithDockers.Core.Generics;
 using AutoMapper;
 using MgrAngularWithDockers.Core.Extensions;
 using Microsoft.AspNet.OData.Extensions;
+using MgrAngularWithDockers.Core.Models.db;
+using System;
 
 namespace MgrAngularWithDockers
 {
@@ -29,14 +29,7 @@ namespace MgrAngularWithDockers
 
             AutoMapperConfiguration(services);
 
-            services.AddDbContext<ApplicationDbContext>(options => 
-            options.UseSqlServer("DefaultConnection")
-            .UseLazyLoadingProxies());
-            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "ClientApp/dist";
-            });
+            InitDb(services);
 
             services.AddControllers().AddNewtonsoftJson();
             services.AddOData();
@@ -62,6 +55,9 @@ namespace MgrAngularWithDockers
 
             //app.UseHttpsRedirection();
             app.UseRouting();
+
+
+
             //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
@@ -79,13 +75,38 @@ namespace MgrAngularWithDockers
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    //spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://webangular:4200");
                 }
             });
 
             
         }
 
+
+        private void InitDb(IServiceCollection services)
+        {
+
+            var server = Configuration["DBServer"] ?? "db-server";
+            var port = Configuration["DBPort"] ?? "1400";
+            var user = Configuration["DBUser"] ?? "SA";
+            var password = Configuration["DBPassword"] ?? "Mgr5432!";
+            var database = Configuration["Database"] ?? "MgrAngularWithDockers";
+            var inDocker = bool.Parse(Configuration["InDocker"] ?? "false");
+            Console.WriteLine($"IN docker --- > ${inDocker}");
+            var connectionString = inDocker ? $"Server={server},{port};Database={database};User={user};Password={password}" : "DefaultConnection";// DOCKER & LOCAL
+            Console.WriteLine($"connection string {connectionString}");
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(connectionString) 
+                    .UseLazyLoadingProxies());
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/dist";
+            });
+        }
 
         private void AutoMapperConfiguration(IServiceCollection services)
         {

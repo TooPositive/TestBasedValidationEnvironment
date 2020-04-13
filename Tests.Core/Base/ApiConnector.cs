@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tests.Base
+namespace Tests.Core.Base
 {
     public static class ApiConnector
     {

@@ -11,13 +11,13 @@ using Castle.Core.Logging;
 using Microsoft.Extensions.Logging;
 using MgrAngularWithDockers.Core.Services.Interfaces;
 using MgrAngularWithDockers.Core.Generics;
-using Tests.Simple;
+using Tests.Core.Simple;
 using MgrAngularWithDockers.Core.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using MgrAngularWithDockers.Core.Extensions;
 
-namespace IntegrationTests.Api
+namespace IntegrationTests.Core.Api
 {
     [TestFixture]
     public class TestResultTest
@@ -58,7 +58,7 @@ namespace IntegrationTests.Api
         public void PostNewTestResult()
         {
             var test = new SimpleIOCheckTest() { Id = new Guid(), Duration = new TimeSpan(5, 0, 0), Iterations = 1 };
-            var result = new TestResultDto() { Id = new Guid(), TestId = test.Id, Result = Tests.Base.Enums.Results.Passed };
+            var result = new TestResultDto() { Id = new Guid(), TestId = test.Id, Result = Tests.Core.Base.Enums.Results.Passed };
 
             var apiResult = _testResultController.PostNew(result);
             Assert.AreEqual(apiResult.StatusCode, new OkResult().StatusCode);
