@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,7 +20,7 @@ namespace Tests.Core.Base
             var webReq = (HttpWebRequest)WebRequest.Create(url);
             webReq.Method = method;
             webReq.Accept = "application/json";
-            
+
             ////Add key to header if operation is supplied
             //if (!string.IsNullOrEmpty(operation))
             //{
@@ -47,6 +48,23 @@ namespace Tests.Core.Base
             var responseContent = streamReader.ReadToEnd().Trim();
             var jsonObject = JsonConvert.DeserializeObject<T>(responseContent);
             return jsonObject;
+        }
+
+        public static void PostAsync(string uri, string api, object objectToPost)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(uri);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                var jsonObject = JsonConvert.SerializeObject(objectToPost);
+                var stringContent = new StringContent(jsonObject, UnicodeEncoding.UTF8, "application/json");
+                HttpResponseMessage response = client.PostAsync(api, stringContent).Result;
+
+                if (!response.IsSuccessStatusCode)
+                    throw new HttpRequestException("Error posting test result to api.");
+            }
         }
     }
 }

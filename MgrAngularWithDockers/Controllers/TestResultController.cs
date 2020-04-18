@@ -1,19 +1,14 @@
 ﻿using MgrAngularWithDockers.Models;
-using MgrAngularWithDockers.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using MgrAngularWithDockers.Core.Services.Interfaces;
-using MgrAngularWithDockers.Core.Models.Interfaces;
 using MgrAngularWithDockers.Core.Generics;
-using MgrAngularWithDockers.Core.Services;
-using MgrAngularWithDockers.Core.Dtos;
-using Microsoft.AspNetCore.Http;
 using AutoMapper;
 using Microsoft.AspNet.OData;
+using Tests.Core.Dtos;
+using static Tests.Core.Base.Enums;
+using System;
 
 namespace MgrAngularWithDockers.Controllers
 {
@@ -38,9 +33,9 @@ namespace MgrAngularWithDockers.Controllers
         [HttpPost]
         public StatusCodeResult PostNew(TestResultDto testResultDto)
         {
-            
-            var testResult = new TestResult() { Id = testResultDto.Id, Result = testResultDto.Result, Test = testRepository.GetById(testResultDto.TestId) };            
+            var testResult = new TestResult() { Id = testResultDto.Id, Result = (Results)Enum.Parse(typeof(Results), testResultDto.ResultName), Test = testRepository.GetById(testResultDto.TestId), ExecutionTime = testResultDto.ExecutionTime, Duration = testResultDto.Duration};            
             testResultRepository.Create(testResult);
+            testResultRepository.SaveChanges();
             return Ok();
         }
 

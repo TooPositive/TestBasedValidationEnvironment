@@ -20,7 +20,7 @@
           {{testResult.executionTime | date: 'dd/MM/yyyy h:mm:ss'}}
         </td>
         <td>
-          {{testResult.testDuration}}
+          {{showTimeSpan(testResult.duration)}}
         </td>
         <td>
           {{testResult.resultName}}
@@ -48,7 +48,7 @@
           {{testResult.testName}}
         </td>
         <td>
-          {{testResult.testDuration}}
+          {{testResult.duration}}
         </td>
       </tr>
     </tbody>

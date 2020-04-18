@@ -25,14 +25,14 @@ namespace MgrAngularWithDockers.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time");
-
                     b.Property<int>("Iterations")
                         .HasColumnType("int");
 
                     b.Property<string>("TestNamespace")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<TimeSpan>("Timeout")
+                        .HasColumnType("time");
 
                     b.HasKey("Id");
 
@@ -45,14 +45,14 @@ namespace MgrAngularWithDockers.Core.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<TimeSpan>("Duration")
+                        .HasColumnType("time");
+
                     b.Property<DateTime>("ExecutionTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("Result")
                         .HasColumnType("int");
-
-                    b.Property<TimeSpan>("TestDuration")
-                        .HasColumnType("time");
 
                     b.Property<Guid>("TestId")
                         .HasColumnType("uniqueidentifier");

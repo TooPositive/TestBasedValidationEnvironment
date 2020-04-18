@@ -15,7 +15,7 @@ namespace MgrAngularWithDockers.Models
         [Key]
         public Guid Id { get; set; }
         public string TestNamespace { get; set; }
-        public TimeSpan Duration { get; set; }
+        public TimeSpan Timeout { get; set; }
         public int Iterations { get; set; }
 
         public virtual ICollection<TestResult> TestResults { get; set; }

@@ -13,7 +13,7 @@ namespace MgrAngularWithDockers.Core.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     TestNamespace = table.Column<string>(nullable: true),
-                    Duration = table.Column<TimeSpan>(nullable: false),
+                    Timeout = table.Column<TimeSpan>(nullable: false),
                     Iterations = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -28,7 +28,7 @@ namespace MgrAngularWithDockers.Core.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Result = table.Column<int>(nullable: false),
                     ExecutionTime = table.Column<DateTime>(nullable: false),
-                    TestDuration = table.Column<TimeSpan>(nullable: false),
+                    Duration = table.Column<TimeSpan>(nullable: false),
                     TestId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>

@@ -55,9 +55,6 @@ namespace MgrAngularWithDockers
 
             //app.UseHttpsRedirection();
             app.UseRouting();
-
-
-
             //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
@@ -93,9 +90,7 @@ namespace MgrAngularWithDockers
             var password = Configuration["DBPassword"] ?? "Mgr5432!";
             var database = Configuration["Database"] ?? "MgrAngularWithDockers";
             var inDocker = bool.Parse(Configuration["InDocker"] ?? "false");
-            Console.WriteLine($"IN docker --- > ${inDocker}");
-            var connectionString = inDocker ? $"Server={server},{port};Database={database};User={user};Password={password}" : "DefaultConnection";// DOCKER & LOCAL
-            Console.WriteLine($"connection string {connectionString}");
+            var connectionString = inDocker ? $"Server={server},{port};Database={database};User={user};Password={password}" : "Server=(localdb)\\mssqllocaldb;Database=MgrAngularWithDockers;Trusted_Connection=True;";
 
             services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(connectionString) 

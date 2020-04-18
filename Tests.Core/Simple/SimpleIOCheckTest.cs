@@ -13,8 +13,9 @@ namespace Tests.Core.Simple
     {
         private static Func<Results> FuncTestResultCheck { get; set; }
         private string[] files;
-        public SimpleIOCheckTest() : base("SimpleIOCheck", TimeSpan.FromMinutes(5), 2)
+        public SimpleIOCheckTest() : base(TimeSpan.FromMinutes(5), 2)
         {
+            //var xx = GetType().Namespace;
             base.TestFlow = Flow;
             Id = new Guid("6C8588B1-10EE-40D6-9B94-063451097327");
         }

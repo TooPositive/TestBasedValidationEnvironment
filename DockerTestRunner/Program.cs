@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Tests.Core.Simple;
 
 namespace DockerTestRunner
 {
@@ -9,7 +10,8 @@ namespace DockerTestRunner
         static void Main(string[] args)
         {
             Console.WriteLine("Starting test.....");
-            args = new string[] { "-test Tests.Core.Simple.SimpleIOCheckTest, Tests.Core" };
+            args = new string[] { "-test Tests.Core.Simple.SimpleIOCheckTest, Tests.Core, Version = 1.0.0.0, Culture = neutral, PublicKeyToken = null" };
+            //var testNameSpace = GetTestName(args);
             Type type = Type.GetType(GetTestName(args));
             object classInstance = Activator.CreateInstance(type, null);
             MethodInfo method = type.GetMethod("RunTest", BindingFlags.Public | BindingFlags.Instance);

@@ -2,20 +2,16 @@
 using Moq;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 using MgrAngularWithDockers.Controllers;
-using MgrAngularWithDockers.Interfaces;
 using System.Linq;
-using Castle.Core.Logging;
 using Microsoft.Extensions.Logging;
-using MgrAngularWithDockers.Core.Services.Interfaces;
 using MgrAngularWithDockers.Core.Generics;
 using Tests.Core.Simple;
-using MgrAngularWithDockers.Core.Dtos;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using MgrAngularWithDockers.Core.Extensions;
+using Tests.Core.Dtos;
 
 namespace IntegrationTests.Core.Api
 {
@@ -57,8 +53,8 @@ namespace IntegrationTests.Core.Api
         [Test]
         public void PostNewTestResult()
         {
-            var test = new SimpleIOCheckTest() { Id = new Guid(), Duration = new TimeSpan(5, 0, 0), Iterations = 1 };
-            var result = new TestResultDto() { Id = new Guid(), TestId = test.Id, Result = Tests.Core.Base.Enums.Results.Passed };
+            var test = new SimpleIOCheckTest() { Id = new Guid(), Timeout = new TimeSpan(5, 0, 0), Iterations = 1 };
+            var result = new TestResultDto() { Id = new Guid(), TestId = test.Id, ResultName = Enum.GetName(typeof(Tests.Core.Base.Enums.Results), Tests.Core.Base.Enums.Results.Passed) };
 
             var apiResult = _testResultController.PostNew(result);
             Assert.AreEqual(apiResult.StatusCode, new OkResult().StatusCode);

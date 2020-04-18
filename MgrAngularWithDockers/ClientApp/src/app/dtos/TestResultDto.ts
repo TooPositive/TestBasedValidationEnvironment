@@ -7,5 +7,5 @@ export interface TestResultDto {
   testId: string;
   testName: string;
   executionTime: Moment;
-  testDuration: any;
+  duration: Moment;
 }

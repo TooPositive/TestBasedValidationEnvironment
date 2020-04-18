@@ -22,16 +22,23 @@ export class TestResultComponent {
 
 
   private getHistoryTestResults(http: HttpClient, baseUrl: string) {
-    console.log(`trying connect to: ${baseUrl + `api/TestResult/Filter/?$filter=Result ne 'InProgress'`}`);
-        http.get<TestResultDto[]>(baseUrl + `api/TestResult/Filter/?$filter=Result ne 'InProgress'`).subscribe(result => {
+        http.get<TestResultDto[]>(baseUrl + `api/TestResult/Filter/?$filter=ResultName ne 'InProgress'`).subscribe(result => {
           this.historyTestResults = result;
         }, error => console.error(error));
   }
 
   private getInprogressTestResults(http: HttpClient, baseUrl: string) {
-    http.get<TestResultDto[]>(baseUrl + `api/TestResult/Filter/?$filter=Result eq 'InProgress'`).subscribe(result => {
+    http.get<TestResultDto[]>(baseUrl + `api/TestResult/Filter/?$filter=ResultName eq 'InProgress'`).subscribe(result => {
       this.inprogressTestResults = result;
     }, error => console.error(error));
+  }
+
+  showTimeSpan(testDuration) {
+    console.log(testDuration);
+    var min = testDuration.Minutes < 10 ? "0" + testDuration.Minutes : testDuration.Minutes;
+    var sec = testDuration.Seconds < 10 ? "0" + testDuration.Seconds : testDuration.Seconds;
+    var hour = testDuration.Hours < 10 ? "0" + testDuration.Hours : testDuration.Hours;
+    return testDuration;
   }
 }
 

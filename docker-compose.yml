@@ -51,3 +51,12 @@ services:
       - InDocker=true
     networks:
       - localdev
+
+ tests:
+    build:
+     context: .
+     dockerfile: DockerTestRunner/Dockerfile
+    depends_on:
+     - webapi
+    networks:
+     - localdev

@@ -5,9 +5,9 @@ namespace Tests.Core.Interfaces
 {
     public interface ITest
     {
-        Guid Id { get; set; }
-        //string TestNamespace { get; set; }
-        TimeSpan Duration { get; set; }
-        int Iterations { get; set; }
+        public Guid Id { get; set; }
+        public string TestNamespace { get; set; }
+        public TimeSpan Timeout { get; set; }
+        public int Iterations { get; set; }
     }
 }
