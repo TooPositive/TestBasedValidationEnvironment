@@ -13,7 +13,7 @@ namespace InstanceMicroService.Services.Docker
         public static Stream CreateTarballForDockerfileDirectory(string directory)
         {
             var tarball = new MemoryStream();
-            var files = Directory.GetFiles(directory, "*.*", SearchOption.AllDirectories);
+            var files = Directory.GetFiles(directory, "Dockerfile", SearchOption.AllDirectories);
 
             using var archive = new TarOutputStream(tarball)
             {

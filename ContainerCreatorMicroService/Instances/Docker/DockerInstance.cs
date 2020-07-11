@@ -9,6 +9,7 @@ using System.IO;
 using InstanceMicroService.Services.Docker;
 using Docker.DotNet.Models;
 using Tests.Core.Interfaces;
+using System.Diagnostics;
 
 namespace InstanceMicroService.Instances
 {
@@ -17,12 +18,14 @@ namespace InstanceMicroService.Instances
         public string Name { get; set; }
         public Guid Id { get; set; }
         private string testsDockerFileDirectory = "";
-
+        private string dockerTestRunnerContainerName = "dockertestrunner:dev";
+        private string defaultDockerNetwork = "localdev";
+        private StringBuilder log = new StringBuilder();
         public DockerInstance()
         {
 
 //            var xx = (new FileInfo(AppDomain.CurrentDomain.BaseDirectory)).Directory.Parent.FullName;
-            testsDockerFileDirectory = @"D:\Projekty\MgrAngularWithDockers\SimpleDockerTests";
+            testsDockerFileDirectory = @"D:\Projekty\MgrAngularWithDockers\DockerTestRunner";
             //testsDockerFileDirectory = Path.Combine(new string[] { AppDomain.CurrentDomain.BaseDirectory, @"..\TestsDockerFile" });
         }
 
@@ -41,7 +44,6 @@ namespace InstanceMicroService.Instances
             try
             {
                 await CreateDockerContainer();
-                throw new NotImplementedException();
             }
             catch (Exception e)
             {
@@ -51,18 +53,62 @@ namespace InstanceMicroService.Instances
 
         private async Task CreateDockerContainer()
         {
-            var testsDockerFileTarStream = DockerStreamService.CreateTarballForDockerfileDirectory(testsDockerFileDirectory);
-            var imageBuildParameters = new ImageBuildParameters() { Tags = new List<string>() { "tests:dev" } /*Dockerfile = "TestsDockerFile"*/ };
-
             using var dockerClient = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine")).CreateClient();
-            var xx = await dockerClient.Images.ListImagesAsync(new Docker.DotNet.Models.ImagesListParameters() { }, new System.Threading.CancellationToken());
-            var yy = xx.Select(x => x.RepoTags).ToList();
-            using var responseStream = await dockerClient.Images.BuildImageFromDockerfileAsync(testsDockerFileTarStream, imageBuildParameters);
-            var xx2 = await dockerClient.Images.ListImagesAsync(new Docker.DotNet.Models.ImagesListParameters() { }, new System.Threading.CancellationToken());
+            var dockerTestRunnerImage = await dockerClient.Images.ListImagesAsync(new ImagesListParameters() { MatchName = dockerTestRunnerContainerName });
+            var containerName = GenerateName(5);
 
-            /////
-            //DockerClient client = new DockerClientConfiguration(new Uri("npipe://./pipe/docker_engine"), null).CreateClient();
+            var allNetworks = await dockerClient.Networks.ListNetworksAsync();
+            var networkSettings = new EndpointSettings() { Aliases = new List<string>() { defaultDockerNetwork }, NetworkID = allNetworks.First(x=> x.Name.ToLower().Equals(defaultDockerNetwork)).Name };
+            var networkDictionary = new Dictionary<string, EndpointSettings>();
+            networkDictionary.Add(defaultDockerNetwork, networkSettings);
 
+            var createContainerParameters = new CreateContainerParameters() { Image = dockerTestRunnerContainerName, Hostname = $"dockertestrunner-{containerName}", NetworkingConfig = new NetworkingConfig() {EndpointsConfig = networkDictionary}};
+            var createContainerResponse = await dockerClient.Containers.CreateContainerAsync(createContainerParameters);
+            
+            var startContainerResponse = await dockerClient.Containers.StartContainerAsync(createContainerResponse.ID, new ContainerStartParameters() { DetachKeys = "-d"});
+        }
+
+        public static string GenerateName(int len)
+        {
+            Random r = new Random();
+            string[] consonants = { "b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "l", "n", "p", "q", "r", "s", "sh", "zh", "t", "v", "w", "x" };
+            string[] vowels = { "a", "e", "i", "o", "u", "ae", "y" };
+            string Name = "";
+            Name += consonants[r.Next(consonants.Length)].ToUpper();
+            Name += vowels[r.Next(vowels.Length)];
+            int b = 2; //b tells how many times a new letter has been added. It's 2 right now because the first two letters are already in the name.
+            while (b < len)
+            {
+                Name += consonants[r.Next(consonants.Length)];
+                b++;
+                Name += vowels[r.Next(vowels.Length)];
+                b++;
+            }
+
+            return Name;
+
+
+        }
+
+        public void CreateDockerTestRunnerImage(string targetName, string pathToDockerFile)
+        {
+            try
+            {
+                var process = new Process();
+                var startInfo = new ProcessStartInfo
+                {
+                    WindowStyle = ProcessWindowStyle.Hidden,
+                    FileName = "cmd.exe",
+                    Arguments = $"/C docker build -t {targetName} -f {pathToDockerFile}/Dockerfile {pathToDockerFile}"
+                };
+                process.StartInfo = startInfo;
+                process.Start();
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
     }
 }

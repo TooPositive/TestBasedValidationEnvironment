@@ -16,7 +16,7 @@ namespace DockerTestRunner
             object classInstance = Activator.CreateInstance(type, null);
             MethodInfo method = type.GetMethod("RunTest", BindingFlags.Public | BindingFlags.Instance);
             method.Invoke(classInstance, null);
-            System.Threading.Thread.Sleep((int)TimeSpan.FromMinutes(1).TotalMilliseconds);
+            //System.Threading.Thread.Sleep((int)TimeSpan.FromMinutes(5).TotalMilliseconds);
             Console.WriteLine("TEST END!");
         }
         private static string GetTestName(string[] args)

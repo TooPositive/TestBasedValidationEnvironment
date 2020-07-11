@@ -53,6 +53,7 @@ services:
       - localdev
 
  tests:
+    image: dockertestrunner:dev
     build:
      context: .
      dockerfile: DockerTestRunner/Dockerfile

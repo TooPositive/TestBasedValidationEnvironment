@@ -51,7 +51,7 @@ namespace Tests.Core.Base
         public void OnTestEnd()
         {
             Console.WriteLine("Sending result to api.");
-            ApiConnector.PostAsync(Statics.TestMicroserviceUrl, Statics.TestResultApiEndPoint, CreateDto());
+            ApiConnector.PostAsync(Statics.TestResultMicroserviceUrl, Statics.TestResultApiEndPoint, CreateDto());
         }
         private TestResultDto CreateDto()
         {
